@@ -1,12 +1,6 @@
-// ✅ CRITERIA: React Components (Component API) — Functional component (modern API)
-// ✅ CRITERIA: React JSX — uses JSX to display a single expense card
-// ✅ CRITERIA: React Dataflow (Props, Props Validation) — receives expense data and
-//    onDelete callback via props; PropTypes validates each prop
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Map each category to an emoji icon
 const CATEGORY_ICONS = {
   Food: '🍔',
   Transport: '🚌',
@@ -17,7 +11,6 @@ const CATEGORY_ICONS = {
   Other: '📌',
 };
 
-// ✅ CRITERIA: Styling in React — inline style object used for dynamic category colour
 const CATEGORY_COLORS = {
   Food: '#f59e0b',
   Transport: '#3b82f6',
@@ -34,7 +27,6 @@ function ExpenseItem({ expense, onDelete }) {
 
   return (
     <div className="expense-item">
-      {/* ✅ CRITERIA: Styling in React — inline style for dynamic background tint */}
       <div className="expense-icon" style={{ backgroundColor: color + '22', color }}>
         {icon}
       </div>
@@ -63,7 +55,6 @@ function ExpenseItem({ expense, onDelete }) {
   );
 }
 
-// ✅ CRITERIA: React Dataflow (Props Validation) — PropTypes enforces shape of expense prop
 ExpenseItem.propTypes = {
   expense: PropTypes.shape({
     id: PropTypes.number.isRequired,

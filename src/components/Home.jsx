@@ -1,16 +1,9 @@
-// ✅ CRITERIA: React JSX — entire render is JSX
-// ✅ CRITERIA: React Components (Component API) — functional component
-// ✅ CRITERIA: React Dataflow (Props, Props Validation) — receives expenses, addExpense,
-//    deleteExpense from App via props; PropTypes validates them
-// ✅ CRITERIA: Hooks — uses useState to manage the filter category locally
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ExpenseForm from './ExpenseForm.jsx';
-import ExpenseItem from './ExpenseItem.jsx';
+import ExpenseItem from './ExpenseItem.js';
 
 function Home({ expenses, addExpense, deleteExpense }) {
-  // ✅ CRITERIA: Hooks — useState hook for local UI state (selected filter)
   const [filter, setFilter] = useState('All');
 
   const categories = ['All', 'Food', 'Transport', 'Shopping', 'Entertainment', 'Health', 'Education', 'Other'];
@@ -23,7 +16,6 @@ function Home({ expenses, addExpense, deleteExpense }) {
 
   return (
     <div className="home-page">
-      {/* ✅ CRITERIA: React Dataflow (Props) — passing addExpense down as onAdd prop */}
       <ExpenseForm onAdd={addExpense} />
 
       <div className="summary-card">
@@ -73,7 +65,6 @@ function Home({ expenses, addExpense, deleteExpense }) {
   );
 }
 
-// ✅ CRITERIA: React Dataflow (Props Validation)
 Home.propTypes = {
   expenses: PropTypes.array.isRequired,
   addExpense: PropTypes.func.isRequired,

@@ -1,13 +1,7 @@
-// ✅ CRITERIA: React Components (Constructors) — Class-based component with constructor
-// ✅ CRITERIA: React JSX — uses JSX for the form UI
-// ✅ CRITERIA: React Dataflow (State inside class, Props) — this.state manages form fields;
-//    onAdd prop receives data from parent (App) via props
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ExpenseForm extends Component {
-  // ✅ CRITERIA: React Components (Constructor) — constructor initialises component state
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +11,10 @@ class ExpenseForm extends Component {
       date: new Date().toISOString().split('T')[0],
     };
 
-    // Binding methods in constructor (classic class-component pattern)
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // Generic change handler updates whichever field changed
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -37,18 +29,21 @@ class ExpenseForm extends Component {
     }
 
     const newExpense = {
-      id: Date.now(),          // simple unique id
+      id: Date.now(),
       title: title.trim(),
       amount: parseFloat(amount),
       category,
       date,
     };
 
-    // ✅ CRITERIA: React Dataflow (Props) — calling parent's addExpense via props
     this.props.onAdd(newExpense);
 
-    // Reset form
-    this.setState({ title: '', amount: '', category: 'Food', date: new Date().toISOString().split('T')[0] });
+    this.setState({ 
+      title: '', 
+      amount: '', 
+      category: 'Food', 
+      date: new Date().toISOString().split('T')[0] 
+    });
   }
 
   render() {
@@ -135,7 +130,6 @@ class ExpenseForm extends Component {
   }
 }
 
-// ✅ CRITERIA: React Dataflow (Props Validation) — PropTypes validates props passed to this component
 ExpenseForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
 };

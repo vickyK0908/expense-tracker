@@ -1,14 +1,8 @@
-// ✅ CRITERIA: React JSX — full JSX render
-// ✅ CRITERIA: React Components (Component API) — functional component
-// ✅ CRITERIA: Hooks and Routing — rendered by a <Route> in App.js; uses useState
-// ✅ CRITERIA: React Dataflow (Props, Props Validation)
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ExpenseItem from './ExpenseItem.jsx';
+import ExpenseItem from './ExpenseItem.js';
 
 function History({ expenses, deleteExpense }) {
-  // ✅ CRITERIA: Hooks — useState for search input
   const [search, setSearch] = useState('');
 
   const filtered = expenses.filter((e) =>
@@ -27,6 +21,8 @@ function History({ expenses, deleteExpense }) {
     acc[monthYear].push(expense);
     return acc;
   }, {});
+
+  const monthYearEntries = Object.entries(grouped);
 
   return (
     <div className="history-page">
@@ -81,7 +77,7 @@ function History({ expenses, deleteExpense }) {
           <p className="empty-hint">Try a different search term for "{search}"</p>
         </div>
       ) : (
-        Object.entries(grouped).map(([monthYear, items]) => (
+        monthYearEntries.map(([monthYear, items]) => (
           <div key={monthYear} className="history-group">
             <div className="group-header">
               <h3 className="group-label">{monthYear}</h3>
@@ -99,7 +95,6 @@ function History({ expenses, deleteExpense }) {
   );
 }
 
-// ✅ CRITERIA: React Dataflow (Props Validation)
 History.propTypes = {
   expenses: PropTypes.array.isRequired,
   deleteExpense: PropTypes.func.isRequired,
